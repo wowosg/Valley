@@ -1,751 +1,831 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>意山谷Valley</title>
-    <style type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');        
-        * {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-        body {
-            background-color: rgba(0, 0, 0, 0.968);
-        }
-        footer {
-            background-color: rgba(0, 0, 0, 0.968);
-            color: gray;
-            font-size: small;
-            padding-bottom: 3em;
-        }
-        a {
-            text-decoration: none;
-            color: gray;
-        }
-        @keyframes transXdelaypart {
-            0%{
-                opacity: 0;
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>意山谷Valley</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+        
+        <style type="text/css">
+            @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');        
+            * {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                font-family: 'Noto Sans TC', sans-serif;
             }
-            50%{
-                opacity: 0;
-                transform: translateX(-300px);
+            body {
+                background-color: rgba(0, 0, 0, 0.968);
             }
-            100%{
-                transform: translateX(0px);
-                opacity: 1;
+            footer {
+                background-color: rgba(0, 0, 0, 0.968);
+                color: gray;
+                font-size: small;
+                padding-bottom: 3em;
             }
-        }
-        @keyframes transYdelaypart {
-            0%{
-                opacity: 0;
+            .swiper {
+                margin: 0;
+                padding: 0;
+                display: none;
             }
-            50%{
-                opacity: 0;
-                transform: translateY(200px);
+            .swiper-wrapper {
+                display: flex;
+                align-items: center;
             }
-            100%{
-                transform: translateY(0px);
-                opacity: 1;
+            a {
+                text-decoration: none;
+                color: gray;
             }
-        }
-        @keyframes transYbanner{
-            0%{
-                transform: translateX(-100px);
-                opacity: 0;
+            @keyframes transXdelaypart {
+                0%{
+                    opacity: 0;
+                }
+                50%{
+                    opacity: 0;
+                    transform: translateX(-300px);
+                }
+                100%{
+                    transform: translateX(0px);
+                    opacity: 1;
+                }
             }
-            100%{
-                transform: translateX(0px);
-                opacity: 1;
+            @keyframes transYdelaypart {
+                0%{
+                    opacity: 0;
+                }
+                50%{
+                    opacity: 0;
+                    transform: translateY(200px);
+                }
+                100%{
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
             }
-        }
-        @keyframes transYtext{
-            0%{
-                transform: translateX(300px);
-                opacity: 0;
+            @keyframes transYbanner{
+                0%{
+                    transform: translateX(-100px);
+                    opacity: 0;
+                }
+                100%{
+                    transform: translateX(0px);
+                    opacity: 1;
+                }
             }
-            100%{
-                transform: translateX(0px);
-                opacity: 1;
+            @keyframes transYtext{
+                0%{
+                    transform: translateX(300px);
+                    opacity: 0;
+                }
+                100%{
+                    transform: translateX(0px);
+                    opacity: 1;
+                }
             }
-        }
-        @keyframes transY {
-            0%{
-                transform: translateY(-30px);
-                opacity: 0;
+            @keyframes transY {
+                0%{
+                    transform: translateY(-30px);
+                    opacity: 0;
+                }
+                100%{
+                    transform: translateY(0px);
+                    opacity: 1;
+                }
             }
-            100%{
-                transform: translateY(0px);
-                opacity: 1;
+            @keyframes opacity {
+                0%{opacity: 0;}
+                100%{opacity: 1;}
             }
-        }
-        @keyframes opacity {
-            0%{opacity: 0;}
-            100%{opacity: 1;}
-        }
-        @keyframes transXdelay {
-            0%{
-                opacity: 0;
+            @keyframes transXdelay {
+                0%{
+                    opacity: 0;
+                }
+                50%{
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                100%{
+                    transform: translateX(0px);
+                    opacity: 1;
+                }
             }
-            50%{
-                opacity: 0;
-                transform: translateX(100px);
+            @keyframes transX {
+                0%{
+                    transform: translateX(100px);
+                    opacity: 0;
+                }
+                100%{
+                    transform: translateX(0px);
+                    opacity: 1;
+                }
             }
-            100%{
-                transform: translateX(0px);
-                opacity: 1;
+            /* 右側跳轉圖標 */
+            .rightside-icon {
+                position: fixed;
+                right: 0;
+                bottom:0;
+                z-index: 50;
+                animation: transXdelay 2s;
             }
-        }
-        @keyframes transX {
-            0%{
-                transform: translateX(100px);
-                opacity: 0;
+            .rightside-icon svg {
+                margin-bottom: 20px;
+                transition: .2s;
+                color: white;
             }
-            100%{
-                transform: translateX(0px);
-                opacity: 1;
+            .rightside-icon svg:hover {
+                color:burlywood;
+                transform: translateX(-10px);
             }
-        }
-        /* 右側跳轉圖標 */
-        .rightside-icon {
-            position: fixed;
-            right: 0;
-            top:40vh;
-            z-index: 50;
-            animation: transXdelay 2s;
-        }
-        .rightside-icon svg {
-            margin-bottom: 20px;
-            transition: .2s;
-            color: white;
-        }
-        .rightside-icon svg:hover {
-            color:burlywood;
-            transform: translateX(-10px);
-        }
-        /* 導航欄 */
-        .nav {
-            height: 100px;
-            display: flex;
-            background-color: rgba(0, 0, 0, 0.84);
-            color: aliceblue;
-        }
-        .nav-left {
-            width: 33.3%;
-        }
-        .nav-center {
-            width: 33.3%;
-            display: flex;
-            justify-content: center;
-            animation: transY 2s;
-        }
-        .nav-right {
-            width: 33.3%;
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 1em;
-            flex-wrap: nowrap;
-            align-items: center;
-            animation: transX 1.5s;
-        }
-        .nav-right a {
-            font-size: large;
-            margin: 1em;
-            display: inline-block;
-            transition: 0.2s;
-            color: aliceblue;
-            text-decoration: none;
-        }
-        .nav-right a:hover {
-            transform: rotate(6deg);
-            scale: 120%;
-            color: bisque;
-        }
-        .nav-center img {
-            margin-left: 25px;
-            height: 100%;
-        }
-        .hero-banner {
-            height: 30vh;
-            background-image: url(./asset/valley_banner.jpg);
-            background-size: cover;
-        }
-        /* 簡介 */
-        .desc {
-            position: relative;
-            margin-top: -30px;
-            padding-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            line-height: 3;
-            animation: opacity 3s ;
-        }
-        .desc-caption {
-            color:rgb(151, 44, 29);
-            font-size: xx-large;
-            font-family: 'Times New Roman', Times, serif;
-        }
-        .desc-bigtext {
-            color: rgba(255, 228, 196, 0.705);
-        }
-        .desc-text {
-            color: darkgray;
-        }
-        .desc-title-hr {
-            width: 30%;
-            margin: auto;
-            position: relative;
-            top:-.8em;
-        }
-        .pouplar-hr {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card-title {
-            text-align: center;
-            font-size: xx-large;
-            color:rgb(151, 44, 29);
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-        .card-title div {
-            margin-bottom: 15px;
-            font-family:'Times New Roman', Times, serif;
-        }
-        .card-title-hr {
-            margin: auto;
-            position: relative;
-        }
-        /* 介紹 */
-        .feature-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin:auto;
-            background-image: url(./asset/blackwallpaper.jpg);
-            background-size: cover;
-        }
-        .feature-group1-container {
-            display: flex;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            flex-direction: row-reverse;
-        }
-        .feature-group1-container img{
-            border-radius: 1em;
-            animation: transYbanner 5s;
-        }
-        .feature-banner1 img {
-            width: 300px;
-        }
-        .feature-banner2 img {
-            width: 160px;
-            padding-bottom: 10px;
-        }
-        .feature-banner3 img {
-            width: 160px;
-            padding-top: 10px;
-        }
-        .feature-left {
-            display: flex;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-            flex-direction: row-reverse;
-        }
-        .feature-right {
-            color: antiquewhite;
-        }
-        .feature-banner1 {
-            padding: 25px;      
-            margin: auto;
-        }
-        .feature-banner-group1 {
-            margin: auto;
-        }
-        .feature-text {
-            line-height: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px;
-            animation: transYtext 1.5s;
-        }
-        .feature-h1 {
-            color: azure;
-        }
-        .feature-h2 {
-            text-align: center;
-            position: relative;
-        }
-        .feature-p {
-            color: lightgray;
-            text-align:center;
-            position: relative;
-            top: 1em;
-        }
-        /* 相片牆 */
-        .gallery-container {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: url(./asset/woodwall.png);
-            background-size: cover;
-        }
-        .gallery {
-            padding-top: 30px;
-            padding-bottom: 30px;
-            width: 1200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .gallery img {
-            width: 200px;
-            border-radius: 1em;
-            transition: .2s;
-            margin-bottom: 10%;
-        }
-        .gallery img:hover {
-            scale: 120%;
-        }
-        .pic-col1, .pic-col2, .pic-col3, .pic-col4 {
-            width: 230px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        /* 菜單 */
-        .menu-container {
-            display: flex;
-            justify-content: center;
-            background-size: cover;
-        }
-        .menu {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            /* background-image: url(./asset/valley-square-icon.jpg);
-            background-size:contain; */
-        }
-        .menu-class {
-            width:300px;
-            text-align: center;
-            line-height: 2em;
-            padding: 30px;            
-        }
-        .food-class {
-            padding-top: 20px;
-            padding-bottom: 20px;
-            color: rgba(255, 166, 0, 0.74);
-            border-bottom: solid 2px;
-            font-family: 'Times New Roman', Times, serif;
-        }
-        .food {
-            color:rgb(241, 227, 200);
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-        }
-        /* 料理卡片 */
-        .wrap {
-            padding-top: 10px;
-            display: flex;
-            justify-content:center;
-            flex-wrap: wrap;
-        }
-        .item {
-            width: 260px;
-            margin: 15px;
-            text-align: center;
-            background-color: aliceblue;
-            line-height: 1.6;
-            transform: translateY(5px);
-            transition: .2s;
-            border-radius:2em;
-            position: relative;
-            z-index: 10;
-        }
-        .item:hover {
-            transform: translateY(-5px);
-            background-color:navajowhite;
-        }
-        .item img {
-            width: 100%;
-            border-top-left-radius: 2em;
-            border-top-right-radius: 2em;
+            /* 導航欄 */
+            .nav {
+                height: 100px;
+                display: flex;
+                background-color: rgba(0, 0, 0, 0.84);
+                color: aliceblue;
+            }
+            .nav-left {
+                width: 33.3%;
+            }
+            .nav-center {
+                width: 33.3%;
+                display: flex;
+                justify-content: center;
+                animation: transY 2s;
+            }
+            .nav-right {
+                width: 33.3%;
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 1em;
+                flex-wrap: nowrap;
+                align-items: center;
+                animation: transX 1.5s;
+            }
+            .nav-right a {
+                font-size: large;
+                margin: 1em;
+                display: inline-block;
+                transition: 0.2s;
+                color: aliceblue;
+                text-decoration: none;
+            }
+            .nav-right a:hover {
+                transform: rotate(6deg);
+                scale: 120%;
+                color: bisque;
+            }
+            .nav-center img {
+                margin-left: 25px;
+                height: 100%;
+            }
+            .hero-banner {
+                height: 30vh;
+                background-image: url(./asset/valley_banner.jpg);
+                background-size: cover;
+            }
+            /* 簡介 */
+            .desc {
+                position: relative;
+                margin-top: -30px;
+                padding-bottom: 30px;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                line-height: 3;
+                animation: opacity 3s ;
+            }
+            .desc-caption {
+                color:rgb(151, 44, 29);
+                font-size: xx-large;
+                font-family: 'Times New Roman', Times, serif;
+            }
+            .desc-bigtext {
+                color: rgba(255, 228, 196, 0.705);
+            }
+            .desc-text {
+                color: darkgray;
+            }
+            .desc-title-hr {
+                width: 30%;
+                margin: auto;
+                position: relative;
+                top:-.8em;
+            }
+            .pouplar-hr {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .card-title {
+                text-align: center;
+                font-size: xx-large;
+                color:rgb(151, 44, 29);
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .card-title div {
+                margin-bottom: 15px;
+                font-family:'Times New Roman', Times, serif;
+            }
+            .card-title-hr {
+                margin: auto;
+                position: relative;
+            }
+            /* 介紹 */
+            .feature-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin:auto;
+                background-image: url(./asset/blackwallpaper.jpg);
+                background-size: cover;
+            }
+            .feature-group1-container {
+                display: flex;
+                padding-top: 30px;
+                padding-bottom: 30px;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                flex-direction: row-reverse;
+            }
+            .feature-group1-container img{
+                border-radius: 1em;
+                animation: transYbanner 5s;
+            }
+            .feature-banner1 img {
+                width: 300px;
+            }
+            .feature-banner2 img {
+                width: 160px;
+                padding-bottom: 10px;
+            }
+            .feature-banner3 img {
+                width: 160px;
+                padding-top: 10px;
+            }
+            .feature-left {
+                display: flex;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                flex-direction: row-reverse;
+            }
+            .feature-right {
+                color: antiquewhite;
+            }
+            .feature-banner1 {
+                padding: 25px;      
+                margin: auto;
+            }
+            .feature-banner-group1 {
+                margin: auto;
+            }
+            .feature-text {
+                line-height: 3;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 50px;
+                animation: transYtext 1.5s;
+            }
+            .feature-h1 {
+                color: azure;
+            }
+            .feature-h2 {
+                text-align: center;
+                position: relative;
+            }
+            .feature-p {
+                color: lightgray;
+                text-align:center;
+                position: relative;
+                top: 1em;
+            }
+            /* 相片牆 */
+            .gallery-container {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-image: url(./asset/woodwall.png);
+                background-size: cover;
+            }
+            .gallery {
+                padding-top: 30px;
+                padding-bottom: 30px;
+                width: 1200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            .gallery img {
+                width: 200px;
+                border-radius: 1em;
+                transition: .2s;
+                margin-bottom: 10%;
+            }
+            .gallery img:hover {
+                scale: 120%;
+            }
+            .pic-col1, .pic-col2, .pic-col3, .pic-col4 {
+                width: 230px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            /* 菜單 */
+            .menu-container {
+                display: flex;
+                justify-content: center;
+                background-size: cover;
+            }
+            .menu {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                /* background-image: url(./asset/valley-square-icon.jpg);
+                background-size:contain; */
+            }
+            .menu-class {
+                width:300px;
+                text-align: center;
+                line-height: 2em;
+                padding: 30px;            
+            }
+            .food-class {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                color: rgba(255, 166, 0, 0.74);
+                border-bottom: solid 2px;
+                font-family: 'Times New Roman', Times, serif;
+            }
+            .food {
+                color:rgb(241, 227, 200);
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: nowrap;
+            }
+            /* 料理卡片 */
+            .wrap {
+                padding-top: 10px;
+                display: flex;
+                justify-content:center;
+                flex-wrap: wrap;
+            }
+            .item {
+                width: 260px;
+                margin: 15px;
+                text-align: center;
+                background-color: aliceblue;
+                line-height: 1.6;
+                transform: translateY(5px);
+                transition: .2s;
+                border-radius:2em;
+                position: relative;
+                z-index: 10;
+            }
+            .item:hover {
+                transform: translateY(-5px);
+                background-color:navajowhite;
+            }
+            .item img {
+                width: 100%;
+                border-top-left-radius: 2em;
+                border-top-right-radius: 2em;
 
-        }
-        .item h2 {
-            border-bottom: 1px solid gray;
-            padding-bottom: .3em;
-            margin-bottom: .4em;
-        }
-        .item .text {
-            padding: 20px;
-        }
-        /* footer */
-        .footer-container {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            line-height: 1.8;
-            position: relative;
-            margin-bottom: -30px;
-        }
-        .footer-icon svg {
-            margin-left: 1em;
-        }
-        /* 第一介紹 */
-        .part-container {
-            /* background-color:rgba(46, 45, 45, 0.603); */
-            display: flex;
-            justify-content: center;
-            padding-bottom: 100px;
-            padding-top: 50px;
-            background-image: url(./asset/blackwallpaper.jpg);
-        }
-        .part {
-            width: 1000px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .part-banner img {
-            width:375px;
-            border-radius: 1em;
-            animation: transXdelaypart 3s;
-        }
-        .part-text {
-            color: white;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            justify-content: center;
-            line-height: 3;
-            animation: transYdelaypart 3.5s;
-        }
-        .part-text h1 {
-            color:rgb(191, 238, 255);
-        }
-        .part-text .text1 {
-            color: wheat;
-        }
-
-    </style>
-</head>
-<header>
-    <!-- 右側固定圖標 -->
-    <div class="rightside-icon">
-        <a href="https://www.facebook.com/valley1119/">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-            </svg><br>
-        </a>
-        <a href="https://instagram.com/vall.ey116?utm_medium=copy_link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-            </svg><br>
-        </a>
-        <a href="https://line.me/R/ti/p/@078piwlh">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
-                <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z"/>
-            </svg>
-        </a>
-    </div>
-    <div class="nav">
-        <div class="nav-left"></div>
-        <div class="nav-center">
-            <img class="valley" src="asset/valley_icon.jpg">
-        </div>
-        <div class="nav-right">
-            <!-- <a href="#"><div>立即訂位</div></a>
-            <a href="#"><div>聯絡我們</div></a> -->
-        </div>
-    </div>
-</header>
-<body>
-    <!-- banner -->
-    <div class="hero-banner"></div>
-    <!-- 簡介 -->
-    <div class="desc">
-        <div class="desc-caption"><span style="font-size: 50px;">𝒜</span>𝒷𝑜𝓊𝓉 𝒰𝓈</div>
-        <hr class="desc-title-hr">
-        <div class="desc-bigtext">宜蘭縣冬山鄉冬山路五段380~382號</div>
-        <div class="desc-text">花了十年不斷得研究琢磨，用心創造出屬於自己的口感，每一口都是頂級的味蕾饗宴，用餐即是愉悅的享受。<br>意山谷懂你想要的</div>
-    </div>
-    <!-- 第一介紹 -->
-    <div class="part-container">
-        <div class="part">
-            <div class="part-banner">
-                <img src="./asset/feature_banner4.jpg">
-            </div>
-            <div class="part-text">
-                <h1>舒適空間、悠閒慢活</h1>
-                <div class="text1">即便生活如此忙碌，也需要把時間放慢好好充電</div>
-                <div class="text1">累了的時候何不妨來個悠閒的美食時光</div>
-                <span>歡迎來到 意山谷Valley</span>
-            </div>       
-        </div>
-    </div>
-    <div class="pouplar-hr">
-        <div class="card-title">
-            <div><span style="font-size: 50px; position: relative; left: 8px;">𝓦</span>𝓮𝓵𝓬𝓸𝓶𝓮 𝓽𝓸 <span style="font-size: 50px; position: relative; left: 8px;">𝓥</span>𝓪𝓵𝓵𝓮𝔂</div>
-        </div>
-    </div>
-    <!-- 第二介紹 -->
-    <div class="feature-container">
-        <div class="feature-group1-container">
-            <div class="feature-left">
-                <div class="feature-banner1">
-                    <img src="./asset/feature_banner1.jpg">
-                </div>
-                <div class="feature-banner-group1">
-                    <div class="feature-banner2">
-                        <img src="./asset/feature_banner2.jpg">
-                    </div>
-                    <div class="feature-banner3">
-                        <img src="./asset/feature_banner3.jpg">
-                    </div>
-                </div>
-            </div>             
-            <div class="feature-right">
-                <div class="feature-text">
-                    <h1 class="feature-h1">獨特濃郁風格</h2>
-                    <h2 class="feature-h2">絕佳的風味來自於努力不懈的鑽研</h2>
-                    <p class="feature-p">用心呈現最好的料理</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 菜單 -->
-    <div class="pouplar-hr">
-        <div class="card-title">
-            <div>
-                <span style="font-size: 50px;">ℳ</span>𝑒𝓃𝓊
-            </div>
-            <hr class="card-title-hr">
-        </div>
-    </div>
-    <div class="menu-container">
-        <div class="menu">
-            <div class="menu-class">
-                <h1 class="food-class">Spaghetti</h1>
-                <div class="food">
-                    <div>紅玫瑰漁夫</div>
-                    <div>230</div>
-                </div>
-                <div class="food">
-                    <div>紅玫瑰嫩雞</div>
-                    <div>200</div>
-                </div>
-                <div class="food">
-                    <div>紅玫瑰蟹肉</div>
-                    <div>220</div>
-                </div>
-                <div class="food">
-                    <div>紅玫瑰野菇</div>
-                    <div>160</div>
-                </div>
-                <div class="food">
-                    <div>白玫瑰漁夫</div>
-                    <div>230</div>
-                </div>
-                <div class="food">
-                    <div>白玫瑰嫩雞</div>
-                    <div>200</div>
-                </div>
-                <div class="food">
-                    <div>白玫瑰燻鴨</div>
-                    <div>200</div>
-                </div>
-                <div class="food">
-                    <div>白玫瑰野菇</div>
-                    <div>160</div>
-                </div>
-                <div class="food">
-                    <div>綠玫瑰漁夫</div>
-                    <div>230</div>
-                </div>
-                <div class="food">
-                    <div>綠玫瑰嫩雞</div>
-                    <div>200</div>
-                </div>
-                <div class="food">
-                    <div>綠玫瑰蟹肉</div>
-                    <div>220</div>
-                </div>
-                <div class="food">
-                    <div>綠玫瑰蒜香辣</div>
-                    <div>160</div>
-                </div>
-                <div class="food">
-                    <div>野玫瑰白酒蛤蜊</div>
-                    <div>220</div>
-                </div>
-                <div class="food">
-                    <div>野玫瑰XO醬海鮮</div>
-                    <div>240</div>
-                </div>
-                <div class="food">
-                    <div>野玫瑰蒜香辣</div>
-                    <div>150</div>
-                </div>
-            </div>
-            <div class="menu-class">
-                <h1 class="food-class">Salad & Bread</h1>
-                <div class="food">
-                    <div>凱撒醬風味沙拉</div>
-                    <div>70</div>
-                </div>
-                <div class="food">
-                    <div>大蒜奶油麵包佐沙沙醬</div>
-                    <div>60</div>
-                </div>
-                <h1 class="food-class">Soup</h1>
-                <div class="food">
-                    <div>玉米濃湯</div>
-                    <div>(+20升級酥皮)</div>
-                    <div>50</div>
-                </div>
-                <div class="food">
-                    <div>蛤蜊濃湯</div>
-                    <div>(+20升級酥皮)</div>
-                    <div>50</div>
-                </div>
-                <h1 class="food-class">Dessert</h1>
-                <div class="food">
-                    <div>手工奶酪</div>
-                    <div>50</div>
-                </div>
-                <div class="food">
-                    <div>抹茶蛋糕</div>
-                    <div>50</div>
-                </div>
-                <div class="food">
-                    <div>提拉米蘇蛋糕</div>
-                    <div>50</div>
-                </div>
-                <h1 class="food-class">Drinks</h1>
-                    <div class="food">
-                        <div>特選拿鐵</div>
-                        <div>90</div>
-                    </div>
-                    <div class="food">
-                        <div>美式咖啡</div>
-                        <div>70</div>
-                    </div>
-                    <div class="food">
-                        <div>雪中橙氣泡飲</div>
-                        <div>70</div>
-                    </div>
-                    <div class="food">
-                        <div>柳橙汁</div>
-                        <div>70</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- 人氣推薦 -->
-    <div class="pouplar-hr">
-        <div class="card-title">
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="red" class="bi bi-fire" viewBox="0 0 16 16">
-                    <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+            }
+            .item h2 {
+                border-bottom: 1px solid gray;
+                padding-bottom: .3em;
+                margin-bottom: .4em;
+            }
+            .item .text {
+                padding: 20px;
+            }
+            /* footer */
+            .footer-container {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                line-height: 1.8;
+                position: relative;
+                margin-bottom: -30px;
+            }
+            .footer-icon svg {
+                margin-left: 1em;
+            }
+            /* 第一介紹 */
+            .part-container {
+                /* background-color:rgba(46, 45, 45, 0.603); */
+                display: flex;
+                justify-content: center;
+                padding-bottom: 100px;
+                padding-top: 50px;
+                background-image: url(./asset/blackwallpaper.jpg);
+            }
+            .part {
+                width: 1000px;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            .part-banner img {
+                width:375px;
+                border-radius: 1em;
+                animation: transXdelaypart 3s;
+            }
+            .part-text {
+                color: white;
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                justify-content: center;
+                line-height: 3;
+                animation: transYdelaypart 3.5s;
+            }
+            .part-text h1 {
+                color:rgb(191, 238, 255);
+            }
+            .part-text .text1 {
+                color: wheat;
+            }
+            @media screen and (max-width: 720px) {
+                .gallery-container {
+                    display: none;
+                }
+                .swiper {
+                    display: block;
+                    color: white;
+                    width: 100vw;
+                }
+                .swiper-slide img {
+                    width: 100%;
+                    border-radius: 1em;
+                }
+            }
+        </style>
+    </head>
+    <header>
+        <!-- 右側固定圖標 -->
+        <div class="rightside-icon">
+            <a href="https://www.facebook.com/valley1119/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                </svg><br>
+            </a> 
+            <a href="https://instagram.com/vall.ey116?utm_medium=copy_link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                </svg><br>
+            </a>
+            <a href="https://line.me/R/ti/p/@078piwlh">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
+                    <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z"/>
                 </svg>
-                <span style="font-size: 50px;">ℛ</span>𝑒𝒸𝑜𝓂𝓂𝑒𝓃𝒹
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="red" class="bi bi-fire" viewBox="0 0 16 16">
-                    <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+            </a>
+        </div>
+        <div class="nav">
+            <div class="nav-left"></div>
+            <div class="nav-center">
+                <img class="valley" src="asset/valley_icon.jpg">
+            </div>
+            <div class="nav-right">
+                <!-- <a href="#"><div>立即訂位</div></a>
+                <a href="#"><div>聯絡我們</div></a> -->
+            </div>
+        </div>
+    </header>
+    <body>
+        <!-- banner -->
+        <div class="hero-banner"></div>
+        <!-- 簡介 -->
+        <div class="desc">
+            <div class="desc-caption"><span style="font-size: 50px;">𝒜</span>𝒷𝑜𝓊𝓉 𝒰𝓈</div>
+            <hr class="desc-title-hr">
+            <div class="desc-bigtext">宜蘭縣冬山鄉冬山路五段380~382號</div>
+            <div class="desc-text">花了十年不斷得研究琢磨，用心創造出屬於自己的口感，每一口都是頂級的味蕾饗宴，用餐即是愉悅的享受。<br>意山谷懂你想要的</div>
+        </div>
+        <!-- 第一介紹 -->
+        <div class="part-container">
+            <div class="part">
+                <div class="part-banner">
+                    <img src="./asset/feature_banner4.jpg">
+                </div>
+                <div class="part-text">
+                    <h1>舒適空間、悠閒慢活</h1>
+                    <div class="text1">即便生活如此忙碌，也需要把時間放慢好好充電</div>
+                    <div class="text1">累了的時候何不妨來個悠閒的美食時光</div>
+                    <span>歡迎來到 意山谷Valley</span>
+                </div>       
+            </div>
+        </div>
+        <div class="pouplar-hr">
+            <div class="card-title">
+                <div><span style="font-size: 50px; position: relative; left: 8px;">𝓦</span>𝓮𝓵𝓬𝓸𝓶𝓮 𝓽𝓸 <span style="font-size: 50px; position: relative; left: 8px;">𝓥</span>𝓪𝓵𝓵𝓮𝔂</div>
+            </div>
+        </div>
+        <!-- 第二介紹 -->
+        <div class="feature-container">
+            <div class="feature-group1-container">
+                <div class="feature-left">
+                    <div class="feature-banner1">
+                        <img src="./asset/feature_banner1.jpg">
+                    </div>
+                    <div class="feature-banner-group1">
+                        <div class="feature-banner2">
+                            <img src="./asset/feature_banner2.jpg">
+                        </div>
+                        <div class="feature-banner3">
+                            <img src="./asset/feature_banner3.jpg">
+                        </div>
+                    </div>
+                </div>             
+                <div class="feature-right">
+                    <div class="feature-text">
+                        <h1 class="feature-h1">獨特濃郁風格</h2>
+                        <h2 class="feature-h2">絕佳的風味來自於努力不懈的鑽研</h2>
+                        <p class="feature-p">用心呈現最好的料理</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 菜單 -->
+        <div class="pouplar-hr">
+            <div class="card-title">
+                <div>
+                    <span style="font-size: 50px;">ℳ</span>𝑒𝓃𝓊
+                </div>
+                <hr class="card-title-hr">
+            </div>
+        </div>
+        <div class="menu-container">
+            <div class="menu">
+                <div class="menu-class">
+                    <h1 class="food-class">Spaghetti</h1>
+                    <div class="food">
+                        <div>紅玫瑰漁夫</div>
+                        <div>230</div>
+                    </div>
+                    <div class="food">
+                        <div>紅玫瑰嫩雞</div>
+                        <div>200</div>
+                    </div>
+                    <div class="food">
+                        <div>紅玫瑰蟹肉</div>
+                        <div>220</div>
+                    </div>
+                    <div class="food">
+                        <div>紅玫瑰野菇</div>
+                        <div>160</div>
+                    </div>
+                    <div class="food">
+                        <div>白玫瑰漁夫</div>
+                        <div>230</div>
+                    </div>
+                    <div class="food">
+                        <div>白玫瑰嫩雞</div>
+                        <div>200</div>
+                    </div>
+                    <div class="food">
+                        <div>白玫瑰燻鴨</div>
+                        <div>200</div>
+                    </div>
+                    <div class="food">
+                        <div>白玫瑰野菇</div>
+                        <div>160</div>
+                    </div>
+                    <div class="food">
+                        <div>綠玫瑰漁夫</div>
+                        <div>230</div>
+                    </div>
+                    <div class="food">
+                        <div>綠玫瑰嫩雞</div>
+                        <div>200</div>
+                    </div>
+                    <div class="food">
+                        <div>綠玫瑰蟹肉</div>
+                        <div>220</div>
+                    </div>
+                    <div class="food">
+                        <div>綠玫瑰蒜香辣</div>
+                        <div>160</div>
+                    </div>
+                    <div class="food">
+                        <div>野玫瑰白酒蛤蜊</div>
+                        <div>220</div>
+                    </div>
+                    <div class="food">
+                        <div>野玫瑰XO醬海鮮</div>
+                        <div>240</div>
+                    </div>
+                    <div class="food">
+                        <div>野玫瑰蒜香辣</div>
+                        <div>150</div>
+                    </div>
+                </div>
+                <div class="menu-class">
+                    <h1 class="food-class">Salad & Bread</h1>
+                    <div class="food">
+                        <div>凱撒醬風味沙拉</div>
+                        <div>70</div>
+                    </div>
+                    <div class="food">
+                        <div>大蒜奶油麵包佐沙沙醬</div>
+                        <div>60</div>
+                    </div>
+                    <h1 class="food-class">Soup</h1>
+                    <div class="food">
+                        <div>玉米濃湯</div>
+                        <div>(+20升級酥皮)</div>
+                        <div>50</div>
+                    </div>
+                    <div class="food">
+                        <div>蛤蜊濃湯</div>
+                        <div>(+20升級酥皮)</div>
+                        <div>50</div>
+                    </div>
+                    <h1 class="food-class">Dessert</h1>
+                    <div class="food">
+                        <div>手工奶酪</div>
+                        <div>50</div>
+                    </div>
+                    <div class="food">
+                        <div>抹茶蛋糕</div>
+                        <div>50</div>
+                    </div>
+                    <div class="food">
+                        <div>提拉米蘇蛋糕</div>
+                        <div>50</div>
+                    </div>
+                    <h1 class="food-class">Drinks</h1>
+                        <div class="food">
+                            <div>特選拿鐵</div>
+                            <div>90</div>
+                        </div>
+                        <div class="food">
+                            <div>美式咖啡</div>
+                            <div>70</div>
+                        </div>
+                        <div class="food">
+                            <div>雪中橙氣泡飲</div>
+                            <div>70</div>
+                        </div>
+                        <div class="food">
+                            <div>柳橙汁</div>
+                            <div>70</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 人氣推薦 -->
+        <div class="pouplar-hr">
+            <div class="card-title">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="red" class="bi bi-fire" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+                    </svg>
+                    <span style="font-size: 50px;">ℛ</span>𝑒𝒸𝑜𝓂𝓂𝑒𝓃𝒹
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="red" class="bi bi-fire" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16Zm0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15Z"/>
+                    </svg>
+                </div>
+                <hr class="card-title-hr">
+            </div>
+        </div>
+        <!-- 料理卡片 -->
+        <div class="wrap">
+            <div class="item">
+                <img src="asset/red_rose.jpg">
+                <div class="text">
+                    <h2>紅玫瑰漁夫義大利麵</h2>
+                    濃濃的紅醬搭配新鮮的海鮮，光是用看的就讓人讚不絕口
+                </div>
+            </div>
+            <div class="item">
+                <img src="asset/sala.jpg">
+                <div class="text">
+                    <h2>特製凱撒沙拉</h2>
+                    本店特製的凱撒沙拉，甘甜不黏膩，讓人不禁想再來一碗
+                </div>
+            </div>
+            <div class="item">
+                <img src="asset/white_rose.jpg">
+                <div class="text">
+                    <h2>白玫瑰厚切義大利麵</h2>
+                    小編私心推薦白玫瑰，跟外面的奶油味道比起來完全不是一個檔次
+                </div>
+
+            </div>
+        </div>
+        <!-- 相片集 -->
+        <div class="pouplar-hr">
+            <div class="card-title">
+                <div><span style="font-size: 50px;">𝒢</span>𝒶𝓁𝓁𝑒𝓇𝓎</div>
+                <hr class="card-title-hr">
+            </div>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery">
+                <div class="pic-col1">
+                    <img src="./asset/gallery/pic.jpg">
+                    <img src="./asset/gallery/pic1.jpg">
+                    <img src="./asset/gallery/pic2.jpg">
+                    <img src="./asset/gallery/pic3.jpg">
+                </div>
+                <div class="pic-col2">
+                    <img src="./asset/gallery/pic4.jpg">
+                    <img src="./asset/gallery/pic5.jpg">
+                    <img src="./asset/gallery/pic6.jpg">
+                </div>
+                <div class="pic-col3">
+                    <img src="./asset/gallery/pic7.jpg">
+                    <img src="./asset/gallery/pic8.jpg">
+                    <img src="./asset/gallery/pic9.jpg">
+                </div>
+                <div class="pic-col4">
+                    <img src="./asset/gallery/pic10.jpg">
+                    <img src="./asset/gallery/pic11.jpg">
+                </div>
+            </div>
+        </div>
+        <!-- Swiper -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+            <!-- Slides -->
+                <div class="swiper-slide"><img src="./asset/gallery/pic.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic1.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic2.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic3.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic4.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic5.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic6.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic7.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic8.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic9.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic10.jpg"></div>
+                <div class="swiper-slide"><img src="./asset/gallery/pic11.jpg"></div>
+
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+        
+    </body>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-icon"><br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
+                    <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z"/>
                 </svg>
             </div>
-            <hr class="card-title-hr">
+            <div class="copyright">© 2022 意山谷valley - All Rights Reserved site by WoWoSG</div>
+            <a href="https://zh.pngtree.com/free-backgrounds'">來自的免費背景照片 Pngtree.com</a>
         </div>
-    </div>
-    <!-- 料理卡片 -->
-    <div class="wrap">
-        <div class="item">
-            <img src="asset/red_rose.jpg">
-            <div class="text">
-                <h2>紅玫瑰漁夫義大利麵</h2>
-                濃濃的紅醬搭配新鮮的海鮮，光是用看的就讓人讚不絕口
-            </div>
-        </div>
-        <div class="item">
-            <img src="asset/sala.jpg">
-            <div class="text">
-                <h2>特製凱撒沙拉</h2>
-                本店特製的凱撒沙拉，甘甜不黏膩，讓人不禁想再來一碗
-            </div>
-        </div>
-        <div class="item">
-            <img src="asset/white_rose.jpg">
-            <div class="text">
-                <h2>白玫瑰厚切義大利麵</h2>
-                小編私心推薦白玫瑰，跟外面的奶油味道比起來完全不是一個檔次
-            </div>
+    </footer>
+<!-- SwiperJS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        loop: true,
+        autoplay: {
+            delay: 3000,
+        },
 
-        </div>
-    </div>
-    <!-- 相片集 -->
-    <div class="pouplar-hr">
-        <div class="card-title">
-            <div><span style="font-size: 50px;">𝒢</span>𝒶𝓁𝓁𝑒𝓇𝓎</div>
-            <hr class="card-title-hr">
-        </div>
-    </div>
-    <div class="gallery-container">
-        <div class="gallery">
-            <div class="pic-col1">
-                <img src="./asset/gallery/pic.jpg">
-                <img src="./asset/gallery/pic1.jpg">
-                <img src="./asset/gallery/pic2.jpg">
-                <img src="./asset/gallery/pic3.jpg">
-            </div>
-            <div class="pic-col2">
-                <img src="./asset/gallery/pic4.jpg">
-                <img src="./asset/gallery/pic5.jpg">
-                <img src="./asset/gallery/pic6.jpg">
-            </div>
-            <div class="pic-col3">
-                <img src="./asset/gallery/pic7.jpg">
-                <img src="./asset/gallery/pic8.jpg">
-                <img src="./asset/gallery/pic9.jpg">
-            </div>
-            <div class="pic-col4">
-                <img src="./asset/gallery/pic10.jpg">
-                <img src="./asset/gallery/pic11.jpg">
-            </div>
-        </div>
-    </div>
-</body>
-<footer>
-    <div class="footer-container">
-        <div class="footer-icon"><br>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-line" viewBox="0 0 16 16">
-                <path d="M8 0c4.411 0 8 2.912 8 6.492 0 1.433-.555 2.723-1.715 3.994-1.678 1.932-5.431 4.285-6.285 4.645-.83.35-.734-.197-.696-.413l.003-.018.114-.685c.027-.204.055-.521-.026-.723-.09-.223-.444-.339-.704-.395C2.846 12.39 0 9.701 0 6.492 0 2.912 3.59 0 8 0ZM5.022 7.686H3.497V4.918a.156.156 0 0 0-.155-.156H2.78a.156.156 0 0 0-.156.156v3.486c0 .041.017.08.044.107v.001l.002.002.002.002a.154.154 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157Zm.791-2.924a.156.156 0 0 0-.156.156v3.486c0 .086.07.155.156.155h.562c.086 0 .155-.07.155-.155V4.918a.156.156 0 0 0-.155-.156h-.562Zm3.863 0a.156.156 0 0 0-.156.156v2.07L7.923 4.832a.17.17 0 0 0-.013-.015v-.001a.139.139 0 0 0-.01-.01l-.003-.003a.092.092 0 0 0-.011-.009h-.001L7.88 4.79l-.003-.002a.029.029 0 0 0-.005-.003l-.008-.005h-.002l-.003-.002-.01-.004-.004-.002a.093.093 0 0 0-.01-.003h-.002l-.003-.001-.009-.002h-.006l-.003-.001h-.004l-.002-.001h-.574a.156.156 0 0 0-.156.155v3.486c0 .086.07.155.156.155h.56c.087 0 .157-.07.157-.155v-2.07l1.6 2.16a.154.154 0 0 0 .039.038l.001.001.01.006.004.002a.066.066 0 0 0 .008.004l.007.003.005.002a.168.168 0 0 0 .01.003h.003a.155.155 0 0 0 .04.006h.56c.087 0 .157-.07.157-.155V4.918a.156.156 0 0 0-.156-.156h-.561Zm3.815.717v-.56a.156.156 0 0 0-.155-.157h-2.242a.155.155 0 0 0-.108.044h-.001l-.001.002-.002.003a.155.155 0 0 0-.044.107v3.486c0 .041.017.08.044.107l.002.003.002.002a.155.155 0 0 0 .108.043h2.242c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156v-.56a.156.156 0 0 0-.155-.157H11.81v-.589h1.525c.086 0 .155-.07.155-.156Z"/>
-            </svg>
-        </div>
-        <div class="copyright">© 2022 意山谷valley - All Rights Reserved site by WoWoSG</div>
-        <a href="https://zh.pngtree.com/free-backgrounds'">來自的免費背景照片 Pngtree.com</a>
-    </div>
-</footer>
+        // If we need pagination
+        pagination: {
+            el: '.swiper-pagination',
+        },
 
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        });
+    </script>
 </html>
